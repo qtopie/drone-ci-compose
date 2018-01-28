@@ -1,0 +1,44 @@
+# compose file format version
+version: "3"
+
+services:
+  gogs:
+    image: gogs/gogs
+    container_name: gogs 
+    ports:
+     - "3000:3000"
+     - "2222:22"
+    volumes:
+     - ./data:/data
+  drone-server:
+    image: drone/drone
+    container_name: drone-server0
+    ports:
+      - 8000:8000
+      - 9000
+    volumes:
+      - ./drone:/var/lib/drone
+    restart: always
+    environment:
+      - DRONE_ADMIN=artificerpi
+      - DRONE_OPEN=true
+      - DRONE_HOST=http://localhost
+      - DRONE_GOGS=true
+      - DRONE_GOGS_URL=http://gogs:3000
+      - DRONE_GOGS_GIT_USERNAME=artificerpi
+      - DRONE_GOGS_GIT_PASSWORD=passw0rd
+      - DRONE_SECRET=passw0rd
+    links:
+      - gogs
+  
+  drone-agent:
+    image: drone/agent
+    container_name: drone-agent1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    depends_on:
+      - drone-server
+    environment:
+      - DRONE_SERVER=drone-server:9000
+      - DRONE_SECRET=passw0rd

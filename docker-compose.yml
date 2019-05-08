@@ -14,20 +14,18 @@ services:
     image: drone/drone
     container_name: drone-server0
     ports:
-      - 8000:8000
-      - 9000
+      - 80:80
+      - 443:443
     volumes:
       - ./drone:/var/lib/drone
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     environment:
-      - DRONE_ADMIN=artificerpi
-      - DRONE_OPEN=true
       - DRONE_HOST=http://localhost
-      - DRONE_GOGS=true
-      - DRONE_GOGS_URL=http://gogs:3000
-      - DRONE_GOGS_GIT_USERNAME=artificerpi
-      - DRONE_GOGS_GIT_PASSWORD=passw0rd
-      - DRONE_SECRET=passw0rd
+      - DRONE_GOGS_SERVER=http://gogs:3000
+      - DRONE_GIT_ALWAYS_AUTH=false
+      - DRONE_AGENTS_ENABLED=true
+      - DRONE_RPC_SECRET=passw0rd
     links:
       - gogs
   
@@ -40,5 +38,5 @@ services:
     depends_on:
       - drone-server
     environment:
-      - DRONE_SERVER=drone-server:9000
-      - DRONE_SECRET=passw0rd
+      - DRONE_RPC_HOST=drone-server
+      - DRONE_RPC_SECRET=passw0rd

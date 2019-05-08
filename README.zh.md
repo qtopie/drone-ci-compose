@@ -41,4 +41,8 @@ sudo docker-compose up -d
 * [初始化设置]
   
   打开http://localhost:3000，设置默认数据库为SQLite3，然后其他配置项默认设置。配置好后，注册一个gogs账户。
-  打开http://localhost:8000, 可以查看drone CI（一个go语言写的持续集成工具）的管理界面，暂不需要配置。
+  打开http://localhost:80,使用gogs帐号登陆， 可以查看drone CI（一个go语言写的持续集成工具）的管理界面，暂不需要配置。
+
+
+## 参考
+* https://docs.drone.io/installation/gogs/multi-machine/

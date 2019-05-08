@@ -6,4 +6,4 @@
 
 ## Commons Problems
 - Webhook not working
-Modify webhook `localhost` to `drone-server`
+Modify webhook `localhost` to `drone-server`, eg the push url should be like this: `http://drone-server/hook`

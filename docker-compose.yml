@@ -18,7 +18,6 @@ services:
       - 443:443
     volumes:
       - ./drone:/var/lib/drone
-      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     environment:
       - DRONE_HOST=http://localhost
@@ -38,5 +37,5 @@ services:
     depends_on:
       - drone-server
     environment:
-      - DRONE_RPC_HOST=drone-server
+      - DRONE_RPC_SERVER=http://drone-server
       - DRONE_RPC_SECRET=passw0rd

@@ -46,3 +46,4 @@ sudo docker-compose up -d
 
 ## 参考
 * https://docs.drone.io/installation/gogs/multi-machine/
+* https://readme.drone.io/administration/agents/linux-amd64/

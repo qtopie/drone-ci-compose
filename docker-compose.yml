@@ -20,7 +20,6 @@ services:
       - ./drone:/var/lib/drone
     restart: always
     environment:
-      - DRONE_HOST=http://localhost
       - DRONE_GOGS_SERVER=http://gogs:3000
       - DRONE_GIT_ALWAYS_AUTH=false
       - DRONE_AGENTS_ENABLED=true
